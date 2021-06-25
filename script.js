@@ -36,7 +36,7 @@ let addMessage = document.querySelector('.message'),
      todoList.forEach(function(item,i){ // перебираем наш массив и по каждому индексу используя уникальные свойства объекта создаем вёрстку
      showMessage += `
      <li>
-     <img class='deleteButton' src="trash.png">
+     <img class='deleteButton' id='${i}' src="trash.png">
      <input type='checkbox' ${item.checked?'checked':''} id='item_${i}'>
      <label for='item_${i}'>${item.todo}<label>
      </li>
@@ -55,10 +55,10 @@ let addMessage = document.querySelector('.message'),
 
  //Ниже, функция дает возможность удалять дела
  todo.addEventListener("click", event => { 
-    if (event.target.getAttribute("class")== 'deleteButton'){ // если где произошло клик, соответсвует классу deleteButton  
-        let deleteId = event.target.getAttribute("id"); // то берем значение id элемента который вызвало событие
-        todoList.splice(deleteId,1); // удаляем дело по индексу который соответствует id элемента 
-        localStorage.setItem("todo",JSON.stringify(todoList)); // прописываем изменения в localStorage
-        showMessages(); // выводим уже обновленный список дел
+    if (event.target.getAttribute("class")== 'deleteButton'){  // если где произошло клик, соответсвует классу deleteButton  
+       let deleteId = event.target.getAttribute("id");  // то берем значение id элемента который вызвало событие
+       todoList.splice(deleteId,1);  // удаляем дело по индексу который соответствует id элемента 
+       localStorage.setItem("todo",JSON.stringify(todoList));  // прописываем изменения в localStorage
+       showMessages();  // выводим уже обновленный список дел
     }
  });
