@@ -13,7 +13,7 @@ body {
     color: #4b0507; }
   
   .todo_list {
-    max-width: 400px;
+    max-width: 600px;
     display: block;
     margin: 0 auto 40px;
     background-color: #1BA39C;
@@ -33,12 +33,12 @@ body {
     text-align: center; }
   
   input[type=text] {
-    width: 376px;
+    width: 576px;
     padding: 10px; }
   
   button {
     margin-top: 10px;
-    width: 400px;
+    width: 600px;
     padding: 10px;
     cursor: pointer; }
   
@@ -85,3 +85,20 @@ body {
     -ms-transform: rotate(45deg);
     border-radius: 0;
     margin: 0 15px 5px 5px; }
+
+    .deleteButton {
+      margin-top: 1px;
+      margin-left: 1px;
+      margin-bottom: 1px;
+      margin-right: 1px;
+      width: 20px;
+      height: 20px;
+      padding: 0px;
+      cursor: pointer; }
+      .deleteTask {
+        margin-top: 0px;
+        margin-left: 0px;
+        width: 10px;
+        height: 10px;
+        padding: 0px;
+        cursor: pointer; }
