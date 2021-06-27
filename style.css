@@ -85,20 +85,31 @@ body {
     -ms-transform: rotate(45deg);
     border-radius: 0;
     margin: 0 15px 5px 5px; }
+    
+    input[type=checkbox]:checked + label {
+    color: rgb(75, 71, 71);
+    text-decoration: line-through;  }
 
-    .deleteButton {
+    .btnDel {
       margin-top: 1px;
-      margin-left: 1px;
+      margin-left: 480px;
       margin-bottom: 1px;
       margin-right: 1px;
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
       padding: 0px;
-      cursor: pointer; }
-      .deleteTask {
-        margin-top: 0px;
-        margin-left: 0px;
-        width: 10px;
-        height: 10px;
-        padding: 0px;
-        cursor: pointer; }
+      cursor: pointer;
+      align-items: right;
+     }
+    .btnEdit {
+      margin-top: 1px;
+      margin-left: 5px;
+      margin-bottom: 1px;
+      margin-right: 1px;
+      width: 30px;
+      height: 30px;
+      padding: 0px;
+      cursor: pointer;
+      align-items: right; }
+
+ 
