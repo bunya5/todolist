@@ -51,13 +51,18 @@ window.onload = ()=> {
 
    const delButton = document.createElement('img');
    li.appendChild(delButton)
-   delButton.classList.add('btnDel');
    delButton.setAttribute('src','images/trash.svg')
+   delButton.setAttribute('id','delBtn')
 
    const editButton = document.createElement('img');
    li.appendChild(editButton)
-   editButton.classList.add('btnEdit');
    editButton.setAttribute('src','images/edit.svg')
+   editButton.setAttribute('id','editBtn')
+
+   const saveButton = document.createElement('img');
+   li.appendChild(saveButton)
+   saveButton.setAttribute('src','images/save.svg')
+   saveButton.classList.add('hideSaveBtn');
 
    delButton.addEventListener('click',() => {
       todo.removeChild(li);
@@ -69,16 +74,31 @@ window.onload = ()=> {
   
    editButton.addEventListener('click',(event) => {
       li.classList.toggle('editMode')
-      editButton.classList.toggle('editMode')
+      editButton.classList.toggle('editButton')
+      saveButton.setAttribute('id','saveBtn')
+      
+
       event.preventDefault();
       containsClass = li.classList.contains('editMode');
       if(containsClass){
          editInput.value = label.textContent;
          editInput.focus()
 
+         editInput.addEventListener('keyup', function(event){
+            event.preventDefault();
+            if(event.keyCode == 13){
+               li.classList.remove('editMode') 
+               editButton.classList.remove('editButton')
+               saveButton.removeAttribute('id','saveBtn')
+               label.textContent = editInput.value; 
+            }
+         });
+
          editInput.addEventListener('blur',()=> {
            console.log(event.target)
            li.classList.remove('editMode') 
+           editButton.classList.remove('editButton')
+           saveButton.removeAttribute('id','saveBtn')
            label.textContent = editInput.value; 
          })
 
