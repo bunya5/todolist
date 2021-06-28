@@ -8,10 +8,6 @@ body {
     margin: 0 auto;
     padding-top: 50px; }
   
-  .important {
-    font-weight: bold;
-    color: #4b0507; }
-  
   .todo_list {
     max-width: 600px;
     display: block;
@@ -49,57 +45,18 @@ body {
       list-style-type: none; }
       .todo li:not(:last-child) {
         border-bottom: 1px solid #000; }
-  
-  input[type=checkbox] {
-    opacity: 0;
-    position: absolute; }
-  
-  input[type=checkbox], label {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 5px;
-    cursor: pointer; }
-  
-  input[type=checkbox] + label:before {
-    content: '';
-    background: #1BA39C;
-    border-radius: 5px;
-    border: 2px solid #ddd;
-    display: inline-block;
-    vertical-align: middle;
-    width: 10px;
-    height: 10px;
-    padding: 2px;
-    margin-right: 10px;
-    text-align: center; }
-  
-  input[type=checkbox]:checked + label:before {
-    content: "";
-    display: inline-block;
-    width: 1px;
-    height: 5px;
-    border: solid blue;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    border-radius: 0;
-    margin: 0 15px 5px 5px; }
-    
-    input[type=checkbox]:checked + label {
-    color: rgb(75, 71, 71);
-    text-decoration: line-through;  }
+
 
     .btnDel {
       margin-top: 1px;
-      margin-left: 480px;
+      margin-left: 5px;
       margin-bottom: 1px;
       margin-right: 1px;
       width: 30px;
       height: 30px;
       padding: 0px;
       cursor: pointer;
-      align-items: right;
+      float: right;
      }
     .btnEdit {
       margin-top: 1px;
@@ -110,6 +67,42 @@ body {
       height: 30px;
       padding: 0px;
       cursor: pointer;
-      align-items: right; }
+      float: right; }
 
  
+      li {
+        overflow: hidden;
+        border-bottom: 1px solid #eee;
+    }
+
+  .finished {
+    color: rgb(94, 89, 89);
+    text-decoration: line-through;
+  }
+
+  li > input[type="text"] {
+      width: 400px;
+      float: left;
+  }
+
+  ul li input[type=text] {
+    display: none;
+}
+
+ul li.editMode input[type=text] {
+    display: block;
+}
+
+ul li.editMode label {
+    display: none;
+}
+
+li > label {
+  font-size: 16px;
+  line-height:28px;
+  width: 237px;
+  padding: 1px 0 0 11px
+}
+
+/*.editMode img:not(:first-child) {
+  display: block; }
