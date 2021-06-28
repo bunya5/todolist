@@ -47,7 +47,7 @@ body {
         border-bottom: 1px solid #000; }
 
 
-    .btnDel {
+    #editBtn {
       margin-top: 1px;
       margin-left: 5px;
       margin-bottom: 1px;
@@ -58,7 +58,8 @@ body {
       cursor: pointer;
       float: right;
      }
-    .btnEdit {
+
+    #delBtn  {
       margin-top: 1px;
       margin-left: 5px;
       margin-bottom: 1px;
@@ -67,9 +68,23 @@ body {
       height: 30px;
       padding: 0px;
       cursor: pointer;
-      float: right; }
+      float: right;
 
- 
+     }
+
+     #saveBtn{
+      margin-top: 1px;
+      margin-left: 5px;
+      margin-bottom: 1px;
+      margin-right: 1px;
+      width: 30px;
+      height: 30px;
+      padding: 0px;
+      cursor: pointer;
+      float: right;
+      display: block;
+     }
+
       li {
         overflow: hidden;
         border-bottom: 1px solid #eee;
@@ -104,5 +119,5 @@ li > label {
   padding: 1px 0 0 11px
 }
 
-/*.editMode img:not(:first-child) {
-  display: block; }
+.editButton { display: none; }
+.hideSaveBtn  { display: none; }
