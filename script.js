@@ -3,7 +3,8 @@ let addMessage = document.querySelector('.message'),
     todo = document.querySelector('.todo'),
     finishedTodo = document.querySelector('.finishedTodo'),
     total = document.querySelector('.total');
-    let i = 0;
+    let finishedTasks = [1];
+
     let todoList = [];
     const totalTodo = document.createElement('p')
     total.appendChild(totalTodo)
@@ -27,8 +28,13 @@ addMessage.addEventListener('keyup', function(event){
 window.onload = ()=> {
    if(localStorage.getItem("todo")){
    todoList = JSON.parse(localStorage.getItem("todo")) 
+   if(localStorage.getItem("finishedTasks")){finishedTasks = JSON.parse(localStorage.getItem("finishedTasks"))}
    for (let index of todoList){
-   createDelTodo(index)
+      if(finishedTasks.includes(`${index.id}`)){
+         console.log(finishedTasks.includes(`${index.id}`))
+         createDelTodo(index)
+         label.click()
+      } else createDelTodo(index)
       }
    } 
 };
@@ -58,6 +64,7 @@ window.onload = ()=> {
 
    const label = document.createElement('label');
    li.appendChild(label)
+   label.setAttribute('data-index',todoObj.id)
    label.textContent = todoObj.todo;
 
    const editInput = document.createElement('input');
@@ -85,8 +92,17 @@ window.onload = ()=> {
    delButton.addEventListener('click',() => {
       for(let z = 0; z < todoList.length; z++) {
          if(todoList[z].id == delButton.getAttribute('data-index')) {
-             todoList.splice(z, 1);
-             todo.removeChild(delButton.parentNode)
+             
+             if(delButton.parentNode.parentNode.classList.contains('finishedTodo')) {
+               finishedTodo.removeChild(delButton.parentNode)
+               finishedTasks.splice(z, 1);
+            }
+             else {
+                todo.removeChild(delButton.parentNode)
+               }
+               todoList.splice(z, 1);
+               
+             
              localStorage.setItem('todo',JSON.stringify(todoList));
              totalTodo.innerHTML = `Итого: ${todoList.length} задач`;
          }
@@ -97,7 +113,15 @@ window.onload = ()=> {
       label.classList.toggle('finished')
       if(label.classList.contains('finished')){
          finishedTodo.appendChild(li)
-      } else todo.appendChild(li)
+         finishedTasks.push(label.getAttribute('data-index'))
+      } else {
+         todo.appendChild(li)
+         for(let z = 0; z < finishedTasks.length; z++) {
+            if(finishedTasks[z] == label.getAttribute('data-index')) {
+               finishedTasks.splice(z, 1);}
+      }
+   } 
+   localStorage.setItem('finishedTasks',JSON.stringify(finishedTasks))
    })
   
    editButton.addEventListener('click',(event) => {
@@ -140,5 +164,6 @@ window.onload = ()=> {
    })
 
 }
+
 
 
