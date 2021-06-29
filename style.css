@@ -7,6 +7,21 @@ body {
 .container {
     margin: 0 auto;
     padding-top: 50px; }
+
+.message {
+  margin: 0 auto;
+  max-width: 600px;
+  float: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add {
+  margin: 0 auto;
+  max-width: 600px;
+  float: center;
+  box-sizing: border-box;
+}
   
   .todo_list {
     max-width: 600px;
@@ -29,17 +44,26 @@ body {
     text-align: center; }
   
   input[type=text] {
-    width: 576px;
-    padding: 10px; }
+    width: 100%;
+    padding: 10px; 
+  }
   
   button {
     margin-top: 10px;
-    width: 600px;
+    width: 100%;
     padding: 10px;
     cursor: pointer; }
   
   .todo {
     padding-left: 0; }
+    .todo li {
+      padding: 1em;
+      list-style-type: none; }
+      .todo li:not(:last-child) {
+        border-bottom: 1px solid rgb(40, 18, 138); }
+
+  .finishedTodo {
+    padding-left: 0;}
     .todo li {
       padding: 1em;
       list-style-type: none; }
@@ -106,6 +130,7 @@ body {
 
 ul li.editMode input[type=text] {
     display: block;
+    width: 70%;
 }
 
 ul li.editMode label {
