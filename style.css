@@ -117,7 +117,13 @@ body {
   .finished {
     color: rgb(131, 52, 52);
     text-decoration: line-through;
-  }
+    padding-left: 0; }
+    .finished li {
+      padding: 1em;
+      list-style-type: none; }
+      .finished li:not(:last-child) {
+        border-bottom: 1px solid rgb(40, 18, 138); }
+  
 
   li > input[type="text"] {
       width: 400px;
