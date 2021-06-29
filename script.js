@@ -3,7 +3,7 @@ let addMessage = document.querySelector('.message'),
     todo = document.querySelector('.todo'),
     finishedTodo = document.querySelector('.finishedTodo'),
     total = document.querySelector('.total');
-    let finishedTasks = [1];
+    let finishedTasks = [];
 
     let todoList = [];
     const totalTodo = document.createElement('p')
@@ -28,14 +28,12 @@ addMessage.addEventListener('keyup', function(event){
 window.onload = ()=> {
    if(localStorage.getItem("todo")){
    todoList = JSON.parse(localStorage.getItem("todo")) 
-   if(localStorage.getItem("finishedTasks")){finishedTasks = JSON.parse(localStorage.getItem("finishedTasks"))}
-   for (let index of todoList){
+   if(localStorage.getItem("finishedTasks")){ finishedTasks = JSON.parse(localStorage.getItem("finishedTasks"))}
+   for (let index of todoList){ 
       if(finishedTasks.includes(`${index.id}`)){
-         console.log(finishedTasks.includes(`${index.id}`))
-         createDelTodo(index)
-         label.click()
-      } else createDelTodo(index)
-      }
+         createDelTodo(index,'finished',finishedTodo)
+      } else createDelTodo(index,'todo',todo)
+   }
    } 
 };
 
@@ -49,23 +47,24 @@ window.onload = ()=> {
    todoList.push(todoObj)
    localStorage.setItem('todo',JSON.stringify(todoList));
 
-   createDelTodo(todoObj)
+   createDelTodo(todoObj,'todo',todo)
    addMessage.value = ""; // очищаем поле инпута
  });  
 
 
- function createDelTodo (todoObj){
+ function createDelTodo (todoObj,className,nodeName){
 
    totalTodo.innerHTML = `Итого: ${todoList.length} задач`;
    
    const li = document.createElement('li');
-   todo.appendChild(li)
+   nodeName.appendChild(li)
    li.setAttribute('data-index',todoObj.id)
 
    const label = document.createElement('label');
    li.appendChild(label)
    label.setAttribute('data-index',todoObj.id)
-   label.textContent = todoObj.todo;
+   label.textContent = todoObj.todo;  
+   label.classList.add(className)
 
    const editInput = document.createElement('input');
    editInput.type = "text";
@@ -95,16 +94,17 @@ window.onload = ()=> {
              
              if(delButton.parentNode.parentNode.classList.contains('finishedTodo')) {
                finishedTodo.removeChild(delButton.parentNode)
-               finishedTasks.splice(z, 1);
+               if(finishedTasks.indexOf(delButton.getAttribute('data-index')) != -1) {
+               finishedTasks.splice(finishedTasks.indexOf(delButton.getAttribute('data-index')), 1)
+               localStorage.setItem('finishedTasks',JSON.stringify(finishedTasks))
+               }
             }
              else {
                 todo.removeChild(delButton.parentNode)
                }
-               todoList.splice(z, 1);
-               
-             
-             localStorage.setItem('todo',JSON.stringify(todoList));
-             totalTodo.innerHTML = `Итого: ${todoList.length} задач`;
+               todoList.splice(z, 1)
+               localStorage.setItem('todo',JSON.stringify(todoList));
+               totalTodo.innerHTML = `Итого: ${todoList.length} задач`;
          }
      }
    })
@@ -131,13 +131,14 @@ window.onload = ()=> {
       event.preventDefault();
       containsClass = li.classList.contains('editMode');
 
-      function saveChangedText(){ for(let z = 0; z < todoList.length; z++) {
-         if(todoList[z].id == editButton.getAttribute('data-index')) {
-             todoList[z].todo = label.textContent;}}}
-
       if(containsClass){
          editInput.value = label.textContent;
          editInput.focus()
+
+         function saveChangedText(){ for(let z = 0; z < todoList.length; z++) {
+            if(todoList[z].id == editButton.getAttribute('data-index')) {
+               todoList[z].todo = label.textContent;
+               localStorage.setItem('todo',JSON.stringify(todoList));}}}
 
          editInput.addEventListener('keyup', function(event){
             event.preventDefault();
@@ -160,9 +161,9 @@ window.onload = ()=> {
 
       } else {
          label.textContent = editInput.value;
+         saveChangedText()
       }
    })
-
 }
 
 
