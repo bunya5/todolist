@@ -54,7 +54,7 @@ window.onload = ()=> {
 
  function createDelTodo (todoObj,className,nodeName){
 
-   totalTodo.innerHTML = `Итого: ${todoList.length} задач`;
+   totalTodo.innerHTML = `Количество задач:  ${todoList.length}`;
    
    const li = document.createElement('li');
    nodeName.appendChild(li)
@@ -104,7 +104,7 @@ window.onload = ()=> {
                }
                todoList.splice(z, 1)
                localStorage.setItem('todo',JSON.stringify(todoList));
-               totalTodo.innerHTML = `Итого: ${todoList.length} задач`;
+               totalTodo.innerHTML = `Количество задач:  ${todoList.length}`;
          }
      }
    })
@@ -129,41 +129,42 @@ window.onload = ()=> {
       editButton.classList.toggle('editButton')
       saveButton.setAttribute('id','saveBtn')
       event.preventDefault();
-      containsClass = li.classList.contains('editMode');
 
-      if(containsClass){
+      if(li.classList.contains('editMode')){
          editInput.value = label.textContent;
          editInput.focus()
-
-         function saveChangedText(){ for(let z = 0; z < todoList.length; z++) {
+        
+         function changeStyleAfter (){
+               if (editInput.value != ''){
+               li.classList.remove('editMode') 
+               editButton.classList.remove('editButton')
+               saveButton.removeAttribute('id','saveBtn') 
+               saveChangedText()
+            } else{ 
+               alert('Поле не должно быть пустым');
+               editInput.focus()
+            }
+         }
+         function saveChangedText(){ 
+            label.textContent = editInput.value; 
+            for(let z = 0; z < todoList.length; z++) {
             if(todoList[z].id == editButton.getAttribute('data-index')) {
                todoList[z].todo = label.textContent;
                localStorage.setItem('todo',JSON.stringify(todoList));
                }
             } 
          }
-
          editInput.addEventListener('keyup', function(event){
             event.preventDefault();
             if(event.keyCode == 13){
-               li.classList.remove('editMode') 
-               editButton.classList.remove('editButton')
-               saveButton.removeAttribute('id','saveBtn')
-               label.textContent = editInput.value; 
-               saveChangedText()
+               changeStyleAfter()
             }
-         });
-
+         }) 
          editInput.addEventListener('blur',()=> {
-           li.classList.remove('editMode') 
-           editButton.classList.remove('editButton')
-           saveButton.removeAttribute('id','saveBtn')
-           label.textContent = editInput.value;
-           saveChangedText() 
+            event.preventDefault();
+            changeStyleAfter()
          })
-
       } else {
-         label.textContent = editInput.value;
          saveChangedText()
       }
    })
