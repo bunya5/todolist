@@ -112,6 +112,7 @@ body {
       li {
         overflow: hidden;
         border-bottom: 1px solid #eee;
+        padding: 1em;
     }
 
   .finished {
