@@ -32,8 +32,8 @@ window.onload = ()=> {
    for (let index of todoList){ 
       if(finishedTasks.includes(`${index.id}`)){
          createDelTodo(index,'finished',finishedTodo)
-      } else createDelTodo(index,'todo',todo)
-   }
+       } else createDelTodo(index,'todo',todo)
+     }
    } 
 };
 
@@ -138,7 +138,10 @@ window.onload = ()=> {
          function saveChangedText(){ for(let z = 0; z < todoList.length; z++) {
             if(todoList[z].id == editButton.getAttribute('data-index')) {
                todoList[z].todo = label.textContent;
-               localStorage.setItem('todo',JSON.stringify(todoList));}}}
+               localStorage.setItem('todo',JSON.stringify(todoList));
+               }
+            } 
+         }
 
          editInput.addEventListener('keyup', function(event){
             event.preventDefault();
