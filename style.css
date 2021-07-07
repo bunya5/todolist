@@ -149,6 +149,26 @@ ul li input[type='text'] {
 ul li.editMode input[type='text'] {
   display: block;
   width: 70%;
+  z-index: 99999;
+}
+ul li.editMode {
+  display: block;
+  z-index: 9999;
+}
+
+.todoListEditMode {
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  padding-top: 30px;
+  max-width: 600px;
+
+  margin: 0 auto;
 }
 
 ul li.editMode label {
