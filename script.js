@@ -2,7 +2,8 @@ let addMessage = document.querySelector('.message'),
   addButton = document.querySelector('.add'),
   todo = document.querySelector('.todo'),
   finishedTodo = document.querySelector('.finishedTodo'),
-  total = document.querySelector('.total');
+  total = document.querySelector('.total'),
+  todo_list = document.querySelector('.todo_list');
 let finishedTasks = [];
 
 let todoList = [];
@@ -74,6 +75,8 @@ function createDelTodo(todoObj, className, nodeName) {
   editInput.type = 'text';
   li.appendChild(editInput);
   editInput.classList.add('editInput');
+  editInput.setAttribute('required', '');
+  editInput.setAttribute('placeholder', 'Пожалуйста, заполните это поле');
 
   const delButton = document.createElement('img');
   li.appendChild(delButton);
@@ -138,6 +141,7 @@ function createDelTodo(todoObj, className, nodeName) {
   });
 
   editButton.addEventListener('click', event => {
+    todo_list.classList.toggle('todoListEditMode');
     li.classList.toggle('editMode');
     editButton.classList.toggle('editButton');
     saveButton.setAttribute('id', 'saveBtn');
@@ -149,12 +153,12 @@ function createDelTodo(todoObj, className, nodeName) {
 
       function changeStyleAfter() {
         if (editInput.value != '') {
+          todo_list.classList.remove('todoListEditMode');
           li.classList.remove('editMode');
           editButton.classList.remove('editButton');
           saveButton.removeAttribute('id', 'saveBtn');
           saveChangedText();
         } else {
-          alert('Поле не должно быть пустым');
           editInput.focus();
         }
       }
